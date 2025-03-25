@@ -2,29 +2,28 @@
 #include <limits.h>
 class MinStack {
 public:
-stack <int> st;
-stack <int> helper;
+vector<int> v;
     MinStack() {  //constructor
         
     }
     
     void push(int val) {
-        st.push(val);
-        if(helper.size()== 0 or val<helper.top()) helper.push(val);
-        else helper.push(helper.top());
+        v.push_back(val);
     }
     
     void pop() {
-        st.pop();
-        helper.pop();
+        v.pop_back();
     }
     
     int top() {
-       return st.top();
+      return v[v.size()-1];
     }
    int getMin() {
-    
-    return helper.top();
+    int mini = v[0];
+    for(int i=1; i<v.size();i++){
+        mini = min(mini,v[i]);
+    }
+    return mini;
 }
 };
 
