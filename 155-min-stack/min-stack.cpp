@@ -3,34 +3,28 @@
 class MinStack {
 public:
 stack <int> st;
+stack <int> helper;
     MinStack() {  //constructor
         
     }
     
     void push(int val) {
         st.push(val);
+        if(helper.size()== 0 or val<helper.top()) helper.push(val);
+        else helper.push(helper.top());
     }
     
     void pop() {
         st.pop();
+        helper.pop();
     }
     
     int top() {
        return st.top();
     }
    int getMin() {
-    stack<int> helper;
-    int mn = INT_MAX;
-    while (st.size() > 0) {
-        mn = min(mn, st.top());
-        helper.push(st.top());
-        st.pop();
-    }
-    while (!helper.empty()) {  
-        st.push(helper.top()); 
-        helper.pop();
-    }
-    return mn;
+    
+    return helper.top();
 }
 };
 
